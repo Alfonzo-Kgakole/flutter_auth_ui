@@ -123,37 +123,93 @@ class _RegistrationState extends State<Registration> {
                 },
               ),
             ),
-            const SizedBox(height: 10),
-            Column(
-              children: [
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: RadioListTile(
-                        contentPadding: EdgeInsets.zero,
-                        groupValue: genderSelected,
-                        activeColor: AppColors.whiteColor,
-                        title: Text(
-                          "Gender",
-                          style: GoogleFonts.montserrat(
-                              fontSize: 14,
-                              color: AppColors.whiteColor,
-                              fontWeight: FontWeight.bold),
+            const SizedBox(height: 25),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  Text("Gender", style: GoogleFonts.montserrat(
+                    color: AppColors.whiteColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                  ),
+                  ),
+                  Row(
+                    children: [
+                      Flexible(
+                        fit: FlexFit.loose,
+                        child: RadioListTile(
+                          contentPadding: EdgeInsets.zero,
+                          groupValue: genderSelected,
+                          activeColor: AppColors.whiteColor,
+                          title: Text(
+                            "Male",
+                            style: GoogleFonts.montserrat(
+                                fontSize: 14,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          value: "Male",
+                          onChanged: (value) {
+                            setState(() {
+                              genderSelected = value.toString();
+                            });
+                            print(genderSelected);
+                          },
                         ),
-                        value: "Male",
-                        onChanged: (value) {
-                          setState(() {
-                            genderSelected = value.toString();
-                          });
-                          print(genderSelected);
-                        },
                       ),
-                    ),
-                  ],
-                )
-              ],
+                      Flexible(
+                        fit: FlexFit.loose,
+                        child: RadioListTile(
+                          contentPadding: EdgeInsets.zero,
+                          groupValue: genderSelected,
+                          activeColor: AppColors.whiteColor,
+                          title: Text(
+                            "Female",
+                            style: GoogleFonts.montserrat(
+                                fontSize: 14,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          value: "Female",
+                          onChanged: (value) {
+                            setState(() {
+                              genderSelected = value.toString();
+                            });
+                            print(genderSelected);
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 25),
+            SizedBox(
+              height:60,
+              child: MaterialButton(
+                onPressed: (){},
+                elevation: 5,
+                child: Container(
+                  color: AppColors.whiteColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  constraints:  BoxConstraints(
+                    maxHeight:60,
+                  ),
+                  alignment:Alignment.center,
+                  child: Text("Sign Up", style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
+                  )
+                  ),
+                ),
+              )
             )
           ],
         ),
