@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_ui/utils/appColors.dart';
+import 'package:flutter_auth_ui/widgets/inputText_Widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -10,9 +12,13 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController birthDateController = TextEditingController();
+
+  String genderSelected = "Male";
+  //String genderSelected = "Female";
 
   @override
   Widget build(BuildContext context) {
@@ -53,46 +59,102 @@ class _RegistrationState extends State<Registration> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            const SizedBox(height: 50,),
-           
+            const SizedBox(
+              height: 50,
+            ),
             const SizedBox(height: 25),
+            InputFiend(
+              controller: nameController,
+              hintText: 'please enter your name',
+              icon: Icons.person,
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            InputFiend(
+              controller: emailController,
+              hintText: 'please enter your email',
+              icon: Icons.email,
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            InputFiend(
+              controller: passwordController,
+              hintText: 'please enter your email',
+              icon: Icons.password,
+              obscureText: true,
+            ),
+            const SizedBox(
+              height: 25,
+            ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                obscureText: false,
-                controller: emailController,
-                style: GoogleFonts.montserrat(
-                  color: AppColors.whiteColor,
-                ),
+                style: GoogleFonts.montserrat(color: AppColors.whiteColor),
                 textAlign: TextAlign.center,
-                cursorColor: AppColors.whiteColor,
-                decoration:  InputDecoration(
-                  isDense: true,
-                  prefixIcon: Icon(
-                    Icons.email, color: AppColors.whiteColor, size: 25,
+                controller: birthDateController,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(
+                    Icons.date_range,
+                    color: AppColors.whiteColor,
+                    size: 25,
                   ),
-                  focusColor: AppColors.whiteColor,
-                  hintText: "Please enter your name",
-                  hintStyle:GoogleFonts.montserrat(
-                    fontSize: 12,
-                    color: AppColors.greyColor
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.whiteColor
-                    ),
-                    
-                  ),
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.whiteColor
-                    )
-                  ),
-                  contentPadding: const EdgeInsets.only(top: 15)
+                  hintText: "enter your Birthdate",
+                  hintStyle: GoogleFonts.montserrat(
+                      color: AppColors.greyColor, fontSize: 14),
+                  focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.whiteColor)),
+                  border: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.whiteColor)),
                 ),
+                onTap: () async {
+                  DateTime date = DateTime(1900);
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  date = (await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime(2100)))!;
+                  String dateFormatter = date.toIso8601String();
+                  DateTime dt = DateTime.parse(dateFormatter);
+                  var formatter = DateFormat("dd-MMMM-yyyy");
+                  birthDateController.text = formatter.format(dt);
+                },
               ),
             ),
+            const SizedBox(height: 10),
+            Column(
+              children: [
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: RadioListTile(
+                        contentPadding: EdgeInsets.zero,
+                        groupValue: genderSelected,
+                        activeColor: AppColors.whiteColor,
+                        title: Text(
+                          "Gender",
+                          style: GoogleFonts.montserrat(
+                              fontSize: 14,
+                              color: AppColors.whiteColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        value: "Male",
+                        onChanged: (value) {
+                          setState(() {
+                            genderSelected = value.toString();
+                          });
+                          print(genderSelected);
+                        },
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            )
           ],
         ),
       ),
