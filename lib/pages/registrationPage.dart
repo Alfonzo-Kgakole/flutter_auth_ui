@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_ui/utils/appColors.dart';
 import 'package:flutter_auth_ui/widgets/inputText_Widget.dart';
+import 'package:flutter_auth_ui/widgets/methods.dart';
 import 'package:flutter_auth_ui/widgets/primaryButton.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../widgets/methods.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -132,11 +134,12 @@ class _RegistrationState extends State<Registration> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  Text("Gender", style: GoogleFonts.montserrat(
-                    color: AppColors.whiteColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                  ),
+                  Text(
+                    "Gender",
+                    style: GoogleFonts.montserrat(
+                        color: AppColors.whiteColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
                   Row(
                     children: [
@@ -190,26 +193,61 @@ class _RegistrationState extends State<Registration> {
               ),
             ),
             const SizedBox(height: 25),
-            const button(text: 'Sign Up',),
-            const SizedBox(height: 10,),
+            button(
+              text: 'Sign Up',
+              onPressed: () {
+                if (isValidate()) {
+                  print("data is valid");
+                }
+              },
+            ),
+            const SizedBox(
+              height: 25,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Already have an account?", style: GoogleFonts.montserrat(
-                  color: AppColors.whiteColor,
-                ),),
-                const SizedBox(width: 10,),
-                Text("Sign In", style: GoogleFonts.montserrat(
-                  color: AppColors.whiteColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15
-                ),),
+                Text(
+                  "Already have an account?",
+                  style: GoogleFonts.montserrat(
+                    color: AppColors.whiteColor,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Sign In",
+                  style: GoogleFonts.montserrat(
+                      color: AppColors.whiteColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
               ],
             )
           ],
         ),
       ),
     );
+    
   }
+  bool isValidate() {
+      if (nameController.text.isEmpty) {
+        showScaffold(context, "Please enter your Name");
+        return false;
+      }
+      if (emailController.text.isEmpty) {
+        showScaffold(context, "Please enter your Email");
+        return false;
+      }
+      if (passwordController.text.isEmpty) {
+        showScaffold(context, "Please enter your Password");
+        return false;
+      }
+      if (birthDateController.text.isEmpty) {
+        showScaffold(context, "Please enter your Birthdate");
+        return false;
+      }
+      return true;
+    }
 }
-

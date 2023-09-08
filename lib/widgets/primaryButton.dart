@@ -4,17 +4,19 @@ import 'package:google_fonts/google_fonts.dart';
 
 class button extends StatelessWidget {
   const button({
-    super.key, required this.text,
+    super.key,
+    required this.text, required this.onPressed,
   });
 
   final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         height: 60,
         child: MaterialButton(
-          onPressed: () {},
+          onPressed:onPressed,
           elevation: 5,
           child: Container(
             decoration: BoxDecoration(
