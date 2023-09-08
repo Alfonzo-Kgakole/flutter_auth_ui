@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_ui/utils/appColors.dart';
 import 'package:flutter_auth_ui/widgets/inputText_Widget.dart';
+import 'package:flutter_auth_ui/widgets/primaryButton.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -23,6 +24,7 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
         child: Column(
@@ -188,28 +190,21 @@ class _RegistrationState extends State<Registration> {
               ),
             ),
             const SizedBox(height: 25),
-            SizedBox(
-              height:60,
-              child: MaterialButton(
-                onPressed: (){},
-                elevation: 5,
-                child: Container(
+            const button(text: 'Sign Up',),
+            const SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Already have an account?", style: GoogleFonts.montserrat(
                   color: AppColors.whiteColor,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  constraints:  BoxConstraints(
-                    maxHeight:60,
-                  ),
-                  alignment:Alignment.center,
-                  child: Text("Sign Up", style: GoogleFonts.montserrat(
-                    fontSize: 16,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  )
-                  ),
-                ),
-              )
+                ),),
+                const SizedBox(width: 10,),
+                Text("Sign In", style: GoogleFonts.montserrat(
+                  color: AppColors.whiteColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15
+                ),),
+              ],
             )
           ],
         ),
@@ -217,3 +212,4 @@ class _RegistrationState extends State<Registration> {
     );
   }
 }
+
